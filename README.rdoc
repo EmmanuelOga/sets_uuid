@@ -1,9 +1,18 @@
 = sets_uuid
 
-Description goes here.
+Allows you to declaratively initialize UUID columns in your ActiveRecords.
+
+class MyModel < ActiveRecord::Base
+
+  sets_uuid :before_create, :guid => :compact
+
+end
+
+m = MyModel.create!
+m.guid # => "a80cca54-6925-4331-a2f7-df23da2b837f"
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
