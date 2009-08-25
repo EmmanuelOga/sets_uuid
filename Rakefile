@@ -11,6 +11,8 @@ begin
     gem.homepage = "http://github.com/EmmanuelOga/sets_uuid"
     gem.authors = ["Emmanuel Oga"]
     gem.add_development_dependency "rspec"
+    gem.add_dependency "uuid"
+    gem.add_dependency "activerecord"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
