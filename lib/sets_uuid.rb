@@ -1,6 +1,3 @@
-gem 'uuid', "~> 2.0.2"
-require 'uuid'
-
 module SetsUUID
   module ClassMethods
 
@@ -14,6 +11,8 @@ module SetsUUID
     # Inspect UUID::FORMATS for the complete list.
     #
     def sets_uuid(callback_name, attributes_and_formats_hash)
+      require 'uuid'
+
       raise ArgumentError, "attributes_and_formats_hash does not act as a Hash!" unless attributes_and_formats_hash.respond_to?(:each)
 
       attributes_and_formats_hash.each do |attribute, format|
