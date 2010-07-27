@@ -27,10 +27,10 @@ Gem::Specification.new do |s|
 
   # = MANIFEST =
   s.files = %w[
+    CHANGELOG
     LICENSE
     README.rdoc
     Rakefile
-    VERSION
     lib/sets_uuid.rb
     sets_uuid.gemspec
     spec/sets_uuid_spec.rb
