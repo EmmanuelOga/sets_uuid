@@ -1,38 +1,46 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 class Thing < ActiveRecord::Base
-  sets_uuid :before_validation, :a => :compact
-  sets_uuid :before_create, :b => :default
+  sets_uuid :before_validation, :compact => :compact
+  sets_uuid :before_create, :default => :default
 end
 
 describe "SetsUuid" do
-  it "should be able to create new things" do
-    lambda { Thing.create! :a => "1", :b => "2", :c => "3" }.should_not raise_error
+  it "does not interfere with things creation" do
+    expect { Thing.create!(:some_field => "42") }.to_not raise_error
   end
 
-  it "should be able to set the UUID before validation" do
-    a = Thing.new
-    a.a.should be_blank
-    a.b.should be_blank
-    a.c.should be_blank
-
-    a.valid?
-
-    a.a.should_not be_blank
-    a.b.should be_blank
-    a.c.should be_blank
+  it "can create compact and default uuids" do
+    thing = Thing.create
+    thing.compact.should_not =~ /-/
+    thing.default.should =~ /-/
   end
 
-  it "should be able to set the UUID before creation" do
-    a = Thing.new
-    a.a.should be_blank
-    a.b.should be_blank
-    a.c.should be_blank
+  it "sets the UUID before validation" do
+    thing = Thing.new
 
-    a.save!
+    thing.compact.should be_blank
+    thing.default.should be_blank
+    thing.some_field.should be_blank
 
-    a.a.should_not be_blank
-    a.b.should_not be_blank
-    a.c.should be_blank
+    thing.valid?
+
+    thing.compact.should_not be_blank
+    thing.default.should be_blank
+    thing.some_field.should be_blank
+  end
+
+  it "sets the UUID before creation" do
+    thing = Thing.new
+
+    thing.compact.should be_blank
+    thing.default.should be_blank
+    thing.some_field.should be_blank
+
+    thing.save!
+
+    thing.compact.should_not be_blank
+    thing.default.should_not be_blank
+    thing.some_field.should be_blank
   end
 end

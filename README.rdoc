@@ -2,14 +2,16 @@
 
 Allows you to declaratively initialize UUID columns in your ActiveRecords.
 
-class MyModel < ActiveRecord::Base
+  class MyModel < ActiveRecord::Base
+    sets_uuid :before_create, :guid => :compact
+  end
 
-  sets_uuid :before_create, :guid => :compact
+  m = MyModel.create!
+  m.guid # => "a80cca5469254331a2f7df23da2b837f"
 
-end
-
-m = MyModel.create!
-m.guid # => "a80cca54-6925-4331-a2f7-df23da2b837f"
+This gem requires the simple_uuid gem. The reason I picked this library instead
+of the classic uuid gem is because the later does not use a state file, which I
+find annoying in some situations.
 
 == Note on Patches/Pull Requests
 

@@ -1,0 +1,2 @@
+1.0.0 :: Switching to simple_uuid gem (because it is... simpler, and
+    does not use a file for persisting state)
